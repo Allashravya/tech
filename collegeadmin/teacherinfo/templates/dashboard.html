@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            padding: 20px;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .dashboard-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            background-color: #3498db;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+        }
+        
+        .content-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .info-item {
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .info-value {
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Dashboard -->
+        <div class="sidebar">
+            <div class="dashboard-title">📊 Dashboard</div>
+            <ul class="nav-menu">
+                <li><a href="#profile">👤 Profile</a></li>
+                <li><a href="#courses">📚 Courses</a></li>
+                <li><a href="#salary">💰 Salary</a></li>
+                <li><a href="#experience">⭐ Experience</a></li>
+            </ul>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Profile Section -->
+            <div class="content-section" id="profile">
+                <div class="section-title">👤 Profile Information</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Name</div>
+                        <div class="info-value">{{ teacher.name }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value">{{ teacher.email }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Phone</div>
+                        <div class="info-value">{{ teacher.phone }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Department</div>
+                        <div class="info-value">{{ teacher.department }}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Courses Section -->
+            <div class="content-section" id="courses">
+                <div class="section-title">📚 Courses Teaching</div>
+                <div class="info-grid">
+                    {% for course in courses %}
+                    <div class="info-item">
+                        <div class="info-label">{{ course.name }}</div>
+                        <div class="info-value">Code: {{ course.code }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Salary Section -->
+            <div class="content-section" id="salary">
+                <div class="section-title">💰 Salary Information</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Base Salary</div>
+                        <div class="info-value">${{ teacher.base_salary }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">DA</div>
+                        <div class="info-value">${{ teacher.da }}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Experience Section -->
+            <div class="content-section" id="experience">
+                <div class="section-title">⭐ Experience</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Years of Experience</div>
+                        <div class="info-value">{{ teacher.experience_years }} years</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Qualification</div>
+                        <div class="info-value">{{ teacher.qualification }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
